@@ -1,0 +1,39 @@
+﻿@model LoginViewModel //Bu html sayfasının modelinin LoginViewModel olduğunu belirtiyoruz.
+
+@{
+	ViewData["Title"] = "Login";//Sayfanın başlığını oluşturmamıza yarıyor.
+}
+
+
+
+<div class="row">
+	<div class="col-4 offset-4	">
+		<h1 class="display-4 border-bottom text-center pb-2">@_localization.Getkey("Login").Value</h1>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-4 offset-4">
+		<form method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger small"></div> @*propertylerin dışındaki hataları göster*@
+
+			<div class="form-group mb-3">
+				<label asp-for="Username" class="form-label">@_localization.Getkey("Username").Value</label> <!--asp for ile birlikte kullanıcı sınıftaki propertyler ile bağladık.-->
+				<input asp-for="Username" class="form-control" placeholder="@_localization.Getkey("Username2").Value" />
+				<span asp-validation-for="Username" class="text-danger small"></span> <!--Hata olursa bu span etiketlerinde gözükecek-->
+			</div>
+			<div class="form-group mb-3">
+				<label asp-for="Password" class="form-label">@_localization.Getkey("Password").Value</label>
+				<input asp-for="Password" class="form-control" placeholder="P@ssw*rd!" />
+				<span asp-validation-for="Password" class="text-danger small"></span>
+			</div>
+			<div class="form-group d-grid mb-3">
+				<button type="submit" class="btn btn-primary d-block"><i class="fa-solid fa-right-to-bracket me-2"></i>@_localization.Getkey("Login").Value</button> @*Font-awesome kütüphanesini ekleyerek ikon simgesi koyduk*@
+				
+			</div>
+		</form>
+
+	</div>
+
+</div>
