@@ -1,0 +1,55 @@
+﻿@model IEnumerable<WebApplication2.Entities.Doctor>
+
+@{
+    ViewData["Title"] = _localization.Getkey("Doctors").Value;
+}
+
+<h1>@_localization.Getkey("Doctors").Value</h1>
+
+<div class="row mb-3">
+    <div class="col">
+        <a asp-action="Create" class="btn btn-primary btn-sm"><i class="fa fa-plus me-2"></i>@_localization.Getkey("NewDoctor").Value</a>
+    </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @_localization.Getkey("DoctorName").Value
+            </th>
+            
+            <th>
+                @_localization.Getkey("Polic").Value
+            </th>
+
+            <th>
+                @_localization.Getkey("Work")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoctorName)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Policlinic.PolAd)
+            </td>
+
+            <td>
+                    @Html.DisplayFor(modelItem => item.WorkingHours)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DoctorID">@_localization.Getkey("Edit").Value</a> |
+                <a asp-action="Details" asp-route-id="@item.DoctorID">@_localization.Getkey("Details").Value</a> |
+                <a asp-action="Delete" asp-route-id="@item.DoctorID">@_localization.Getkey("Remove")</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

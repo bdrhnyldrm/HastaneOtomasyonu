@@ -1,0 +1,33 @@
+﻿@model List<WebApplication2.Entities.Randevu>
+
+@{
+    ViewData["Title"] = "RandevuAl";
+}
+
+
+
+
+<h2>@_localization.Getkey("Apo2").Value</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@_localization.Getkey("Doctor").Value</th>
+            <th>@_localization.Getkey("Polic").Value</th>
+            <th>@_localization.Getkey("Apo").Value</th>
+            <!-- Diğer randevu özelliklerini ihtiyaca göre ekleyin -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var appointment in Model)
+        {
+            <tr>
+                <td>@appointment.Doctor?.DoctorName</td>
+                <td>@appointment.Policlinic?.PolAd</td>
+                <td>@appointment.CalismaSaati</td>
+                <!-- Diğer randevu özelliklerini ihtiyaca göre ekleyin -->
+                
+            </tr>
+        }
+    </tbody>
+</table>

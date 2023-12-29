@@ -1,0 +1,62 @@
+﻿@model WebApplication2.Entities.Randevu
+
+@if (ViewBag.msj is not null)
+{
+    <h3>@ViewBag.msj</h3>
+}
+
+@if (ViewBag.msj2 is not null)
+{
+    <h3>@ViewBag.msj2</h3>
+}
+
+<form asp-controller="Randevu" asp-action="RandevuAl" method="post">
+    <div class="form-group">
+        <label for="PoliclinicID">@_localization.Getkey("SelectPol").Value:</label>
+        <select asp-for="PoliclinicID" asp-items="@ViewBag.Poliklinikler" class="form-control" id="PoliclinicID" onchange="loadDoctors()"></select>
+    </div>
+
+    <div class="form-group">
+        <label for="doktorId">@_localization.Getkey("SelectDoc").Value:</label>
+        <select asp-for="DoctorID" class="form-control" id="DoctorID"></select>
+    </div>
+
+    <div class="form-group">
+        <label for="CalismaSaati">@_localization.Getkey("SelectApo").Value:</label>
+        <select asp-for="CalismaSaati" id="saat" class="form-control">
+            <option value="" selected disabled>@_localization.Getkey("Select").Value</option>
+            <option value="11:00">11:00</option>
+            <option value="11:20">11:20</option>
+            <option value="12:10">12:10</option>
+            <option value="12:40">12:40</option>
+            <option value="13:10">13:10</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:40">15:40</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">@_localization.Getkey("R2").Value</button>
+</form>
+
+@section Scripts {
+    <script>
+        function loadDoctors() {
+            var PoliclinicID = $('#PoliclinicID').val();
+
+                    // Call the action method to get doctors based on the selected polyclinic
+                    $.get("/Randevu/GetDoktorlar", { PoliclinicID: PoliclinicID }, function (data) {
+                        $("#DoctorID").empty(); // Clear the existing options
+
+                        // Append the new options based on the returned data
+                        $.each(data, function (index, item) {
+                            $('#DoctorID').append('<option value="' + item.id + '">' + item.name + '</option>');
+                        });
+                    });
+                }
+
+        $(function ()
+        { loadDoctors(); });
+       
+    </script>
+}

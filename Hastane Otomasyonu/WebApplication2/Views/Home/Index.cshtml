@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poliklinik ve Doktor Seçimi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 200px;
+            padding: 8px;
+            margin-bottom: 16px;
+        }
+    </style>
+    <script>
+        function updateWorkingHours() {
+            var polyclinicSelect = document.getElementById('polyclinicSelect');
+            var doctorSelect = document.getElementById('doctorSelect');
+            var workingHoursSelect = document.getElementById('workingHoursSelect');
+
+            var selectedPolyclinic = polyclinicSelect.value;
+            var selectedDoctor = doctorSelect.value;
+
+            var polyclinics = {
+                'polyclinic1': ['Doctor A', 'Doctor B'],
+                'polyclinic2': ['Doctor C', 'Doctor D']
+            };
+
+            var workingHours = {
+                'Doctor A': ['9:00 AM - 5:00 PM', 'Monday to Friday'],
+                'Doctor B': ['10:00 AM - 6:00 PM', 'Monday to Friday'],
+                'Doctor C': ['8:00 AM - 4:00 PM', 'Tuesday to Saturday'],
+                'Doctor D': ['11:00 AM - 7:00 PM', 'Tuesday to Saturday']
+            };
+
+            doctorSelect.innerHTML = '';
+            for (var i = 0; i < polyclinics[selectedPolyclinic].length; i++) {
+                var option = document.createElement('option');
+                option.value = polyclinics[selectedPolyclinic][i];
+                option.text = polyclinics[selectedPolyclinic][i];
+                doctorSelect.add(option);
+            }
+
+            workingHoursSelect.innerHTML = '';
+            for (var i = 0; i < workingHours[selectedDoctor].length; i++) {
+                var option = document.createElement('option');
+                option.text = workingHours[selectedDoctor][i];
+                workingHoursSelect.add(option);
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Poliklinik ve Doktor Seçimi</h2>
+
+    <label for="polyclinicSelect">Poliklinik Seç:</label>
+    <select id="polyclinicSelect" onchange="updateWorkingHours()">
+        <option value="polyclinic1">Poliklinik 1</option>
+        <option value="polyclinic2">Poliklinik 2</option>
+    </select>
+
+    <br>
+
+    <label for="doctorSelect">Doktor Seç:</label>
+    <select id="doctorSelect" onchange="updateWorkingHours()">
+        <!-- Doktorlar burada dinamik olarak güncellenecek -->
+    </select>
+
+    <br>
+
+    <label for="workingHoursSelect">Çalışma Saatleri:</label>
+    <select id="workingHoursSelect">
+        <!-- Çalışma saatleri burada dinamik olarak güncellenecek -->
+    </select>
+
+</body>
+</html>
